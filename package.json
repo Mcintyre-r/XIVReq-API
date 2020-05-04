@@ -1,0 +1,30 @@
+{
+  "name": "request_bot_db",
+  "version": "1.0.0",
+  "description": "A Database to store submissions from the XIV Request Bot",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "test": "cross-env DB_ENV=testing jest --watchAll"
+  },
+  "author": "Ronald McIntyre",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
+    "pg": "^8.0.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "jest": "^25.5.4",
+    "nodemon": "^2.0.3",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
