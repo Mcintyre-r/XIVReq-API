@@ -4,9 +4,8 @@ const cors = require("cors");
 const requestRouter = require('./routes/request/request-router')
 const authRouter = require('./routes/auth/auth-router')
 const server = express();
-const session = require('express-session');
-const passport = require('passport');
-const discordStrategy = require('./strategies/discordStrat')
+
+
 
 
 
@@ -21,18 +20,21 @@ server.use((req, res, next) => {
     res.header("Access-Control-Allow-Credentials", true);
     next(); 
 });
-server.use(session({
-    secret: 'secret',
-    cookie: {
-        maxAge: 60000 * 60 * 24
-    },
-    saveUninitialized: false,
-    name: 'discordAuth'
-}))
+server.use((err,req,res,next)=>{
+    switch (err.message) {
+        case 'NoCodeProvided':
+            return res.status(400).send({
+                status: 'ERROR',
+                error: err.message,
+            });
+        default:
+            return res.status(500).send({
+                status: 'ERROR',
+                error:err.message,
+            })
+    }
+})
 
-
-server.use(passport.initialize());
-server.use(passport.session());
 
 server.get('/', (req,res) => {
     res.status(200).json({message: 'Welcome to the Fantasy Zone, Get Ready!'})

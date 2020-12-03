@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgresql://postgres:145900Qq@localhost:5432/XIVReq',
+    connection: 'postgresql://postgres:145900@localhost:5432/XIVReq',
     useNullAsDefault: true,
     migrations: {
       directory: "./data/migrations",
