@@ -6,7 +6,6 @@ server.get('/',  (req,res) => {
     const uuid = req.query.uuid
     user.getUser(uuid)
         .then( user => {
-            console.log('user:',user)
             res.status(200).json(user)
         })
         .catch(err => {

@@ -6,8 +6,12 @@ module.exports = {
 }
 
 
-function getRequests(){
+function getRequests(query){
     return db('requests')
+        .modify(function (qb) {
+        if (query) {
+          qb.where('requesterId', query);
+        }})
 }
 
 

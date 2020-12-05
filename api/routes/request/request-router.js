@@ -3,9 +3,8 @@ const request = require('./request-model.js')
 
 
 server.get('/',  (req,res) => {
-    request.getRequests()
+    request.getRequests(req.query.id)
         .then( requests => {
-   
             res.status(200).json({ "Requests": requests})
         })
         .catch(err => {
@@ -18,7 +17,6 @@ server.get('/',  (req,res) => {
 server.get('/specific', (req,res) => {
     request.getRequestsById('59423394055069696')
         .then( requests => {
-            console.log(requests)
             res.status(200).json({ "Requests": requests})
         })
 })

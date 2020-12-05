@@ -36,14 +36,12 @@ auth.get('/redirect', (req,res)=>{
       }))
       .then( res => res.json())
       .then( user => {
-        console.log('login:',user)
          const newUser = {
            uuid: user.id,
            username: user.username,
            avatar: user.avatar,
            discriminator: user.discriminator,
          }
-         console.log(newUser)
         userDB.getUser(newUser.uuid)
          .then( user => {
            if(!user){
