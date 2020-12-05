@@ -1,5 +1,5 @@
 const auth = require('express').Router();
-const btoa = require('btoa')
+const userDB = require('../user/user-model.js')
 const fetch = require('node-fetch')
 
 
@@ -40,7 +40,25 @@ auth.get('/redirect', (req,res)=>{
       }))
       .then( res => res.json())
       .then( user => {
-        res.redirect(`http://localhost:3000/?user=${user.id}`)
+        console.log('login:',user)
+         const newUser = {
+           uuid: user.id,
+           username: user.username,
+           avatar: user.avatar,
+           discriminator: user.discriminator,
+         }
+         console.log(newUser)
+        userDB.getUser(newUser.uuid)
+         .then( user => {
+           if(!user){
+            userDB.addUser(newUser)
+            .then( uuid => res.redirect(`http://localhost:3000/?user=${uuid}`) )    
+           } else {
+             userDB.updateUser(newUser)
+             .then( uuid => res.redirect(`http://localhost:3000/?user=${uuid}`) )   
+           }
+         })
+
       })
 });
 
