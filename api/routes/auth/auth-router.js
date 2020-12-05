@@ -4,22 +4,18 @@ const fetch = require('node-fetch')
 
 
 
-const client_id = '706669135915909140'
-const redirect = 'http://localhost:5000/api/auth/redirect'
-const client_secret = 'Oy2aSEkID7k7a2mZsPfoviiIb2EcrJNs'
-
 auth.get('/login', (req,res)=>{
-    res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${client_id}&scope=identify&response_type=code&redirect_uri=${redirect}`)
+    res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${process.env.CLIENT_ID}&scope=identify&response_type=code&redirect_uri=${process.env.CLIENT_REDIRECT}`)
 });
 
 
 
 auth.get('/redirect', (req,res)=>{  
     const data = {
-      client_id,
-      client_secret,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
       grant_type: 'authorization_code',
-      redirect_uri: redirect,
+      redirect_uri: process.env.CLIENT_REDIRECT,
       code: res.req.query.code,
       scope: 'identify guilds email',
     }
@@ -52,10 +48,10 @@ auth.get('/redirect', (req,res)=>{
          .then( user => {
            if(!user){
             userDB.addUser(newUser)
-            .then( uuid => res.redirect(`http://localhost:3000/?user=${uuid}`) )    
+            .then( uuid => res.redirect(`${process.env.HOST}?user=${uuid}`) )    
            } else {
              userDB.updateUser(newUser)
-             .then( uuid => res.redirect(`http://localhost:3000/?user=${uuid}`) )   
+             .then( uuid => res.redirect(`${process.env.HOST}?user=${uuid}`) )   
            }
          })
 
