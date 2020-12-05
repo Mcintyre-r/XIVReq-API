@@ -2,7 +2,7 @@ const db = require('../../../data/dbConfig')
 
 module.exports = {
     getRequests,
-    getRequestsById
+    submitRequest
 }
 
 
@@ -15,7 +15,7 @@ function getRequests(query){
 }
 
 
-function getRequestsById(reqId){
+function submitRequest(request){
     return db('requests')
-        .where("requesterId", reqId)
+        .insert(request)
 }
