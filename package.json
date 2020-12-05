@@ -4,6 +4,7 @@
   "description": "A Database to store submissions from the XIV Request Bot",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "server": "nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --watchAll"
   },
