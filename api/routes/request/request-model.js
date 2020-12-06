@@ -2,7 +2,9 @@ const db = require('../../../data/dbConfig')
 
 module.exports = {
     getRequests,
-    submitRequest
+    submitRequest,
+    deleteRequest,
+    updateRequest
 }
 
 
@@ -18,4 +20,16 @@ function getRequests(query){
 function submitRequest(request){
     return db('requests')
         .insert(request)
+}
+
+function deleteRequest(id){
+    return db('requests')
+        .where('id', id)
+        .delete()
+}
+
+function updateRequest(update, id){
+    return db('requests')
+        .where('id', id)
+        .update(update)
 }
