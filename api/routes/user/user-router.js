@@ -15,6 +15,33 @@ server.get('/',  (req,res) => {
 })
 
 
+server.put('/crafter',  (req,res) => {
+    user.getUser(req.body.user.uuid)
+        .then(person => {
+            if(person){
+                user.updateUser(req.body.user)
+                    .then( result => {
+                        res.status(200).json(result)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(400).json(err)
+                    })
+            } else {
+                user.addUser(req.body.user)
+                    .then( result => {
+                        res.status(200).json(result)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        res.status(400).json(err)
+                    })
+            }
+        })
+    
+})
+
+
 
 
 
