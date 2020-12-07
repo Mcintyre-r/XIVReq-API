@@ -16,11 +16,10 @@ server.get('/',  (req,res) => {
 
 
 server.put('/crafter',  (req,res) => {
-    console.log(req.body)
-    user.getUser(req.body.user.uuid)
+    user.getUser(req.body.uuid)
         .then(person => {
             if(person){
-                user.updateUser(req.body.user)
+                user.updateUser(req.body)
                     .then( result => {
                         res.status(200).json(result)
                     })
@@ -29,7 +28,7 @@ server.put('/crafter',  (req,res) => {
                         res.status(400).json(err)
                     })
             } else {
-                user.addUser(req.body.user)
+                user.addUser(req.body)
                     .then( result => {
                         res.status(200).json(result)
                     })
