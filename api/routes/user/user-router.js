@@ -16,6 +16,7 @@ server.get('/',  (req,res) => {
 
 
 server.put('/crafter',  (req,res) => {
+    console.log(req.body)
     user.getUser(req.body.user.uuid)
         .then(person => {
             if(person){
