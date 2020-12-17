@@ -4,6 +4,7 @@ const cors = require("cors");
 const requestRouter = require('./routes/request/request-router.js')
 const userRouter = require('./routes/user/user-router.js')
 const authRouter = require('./routes/auth/auth-router.js')
+const setRouter = require('./routes/set/set-router.js')
 const server = express();
 
 
@@ -30,4 +31,5 @@ server.get('/', (req,res) => {
 server.use('/api/auth', authRouter);
 server.use('/api/requests', requestRouter);
 server.use('/api/user', userRouter)
+server.use('/api/set', setRouter)
 module.exports = server;

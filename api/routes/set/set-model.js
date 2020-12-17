@@ -8,4 +8,5 @@ module.exports = {
 function getSet(setName){
     return db('sets')
         .where('Class', setName)
+        .first()
 }
