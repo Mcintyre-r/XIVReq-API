@@ -24,6 +24,9 @@ exports.up = function(knex) {
         tbl.string('workerPicture')
         tbl.boolean('completed')
             .defaultTo(false)
+        tbl.boolean('set')
+            .defaultTo(false)
+        tbl.text('setClass')
     })
 };
 

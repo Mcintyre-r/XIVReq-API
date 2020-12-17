@@ -1,13 +1,33 @@
 const server = require('express').Router();
 const request = require('./request-model.js')
 const userDB = require('../user/user-model')
-const webhook = require('webhook-discord')
+const webhook = require('webhook-discord');
+const setDB = require('../set/set-model.js')
 const Hook = new webhook.Webhook(process.env.WEBHOOK)
 
 
 server.get('/',  (req,res) => {
     request.getRequests(req.query.id)
         .then( requests => {
+            for(const request of requests){
+                if(request.set){
+                    setDB.getSet(request.setName).then(set=>{
+                        request.setItems ={
+                            wpnID: set.wpnID,
+                            headID: set.headID,
+                            chestID: set.chestID,
+                            handsID: set.handsID,
+                            legsID: set.legsID,
+                            feetID: set.feetID,
+                            beltID: set.beltID,
+                            earID: set.earID,
+                            neckID: set.neckID,
+                            wristID: set.wristID,
+                            ringID: set.ringID
+                        }
+                    })
+                }
+            }
             res.status(200).json({ "Requests": requests})
         })
         .catch(err => {
