@@ -13,18 +13,19 @@ server.get('/',  (req,res) => {
                 if(request.set){
                     setDB.getSet(request.setName).then(set=>{
                         request.setItems ={
-                            wpnID: set.wpnID,
-                            headID: set.headID,
-                            chestID: set.chestID,
-                            handsID: set.handsID,
-                            legsID: set.legsID,
-                            feetID: set.feetID,
-                            beltID: set.beltID,
-                            earID: set.earID,
-                            neckID: set.neckID,
-                            wristID: set.wristID,
-                            ringID: set.ringID
+                            wpnID: '318'+set.wpnID,
+                            headID: '318'+set.headID,
+                            chestID: '318'+set.chestID,
+                            handsID: '318'+set.handsID,
+                            legsID: '318'+set.legsID,
+                            feetID: '318'+set.feetID,
+                            beltID: '318'+set.beltID,
+                            earID: '318'+set.earID,
+                            neckID: '318'+set.neckID,
+                            wristID: '318'+set.wristID,
+                            ringID: '318'+set.ringID
                         }
+                        set.setName === 'pld' ? request.setItems.shdID = set.shdID : null
                     })
                 }
             }
