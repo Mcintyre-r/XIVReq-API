@@ -59,7 +59,7 @@ server.get('/', (req,res) => {
                             ringIcon: 'https://xivapi.com'+set.ringIcon
 
                         }
-                        if(set.setName === 'pld'){
+                        if(set.Class === 'pld'){
                             request.setItems.shdID = set.shdID 
                             request.setItems.shdName = set.shdName
                             request.setItems.shdIcon = 'https://xivapi.com'+set.shdIcon
