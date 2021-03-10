@@ -71,7 +71,7 @@ server.get('/', (req,res) => {
             res.status(200).json({ "Requests": requests})
         })
         .catch(err => {
-            res.status(400).json({ "error": err, "help": "please"})
+            res.status(400).json(err)
         })
 })
 
