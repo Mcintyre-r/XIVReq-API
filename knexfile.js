@@ -15,7 +15,7 @@ module.exports = {
   },
   production: {
     client: 'pg', 
-    connection: `${process.env.DATABASE_URL}?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory`, 
+    connection: `${process.env.DATABASE_URL}?ssl=true`, 
     migrations: {
        directory: './data/migrations',
     },
@@ -23,5 +23,4 @@ module.exports = {
       directory: "./data/seeds",
     },
   }
-
 };
