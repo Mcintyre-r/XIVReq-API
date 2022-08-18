@@ -31,5 +31,5 @@ server.get('/', (req,res) => {
 server.use('/api/auth', authRouter);
 server.use('/api/requests', requestRouter);
 server.use('/api/user', userRouter)
-server.use('/api/set', setRouter)
+
 module.exports = server;

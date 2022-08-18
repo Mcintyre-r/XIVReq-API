@@ -7,7 +7,6 @@ module.exports = {
     updateRequest
 }
 
-
 function getRequests(query){
     return db('requests')
         .modify(function (qb) {
@@ -16,8 +15,8 @@ function getRequests(query){
         }})
 }
 
-
 function submitRequest(request){
+    console.log(request)
     return db('requests')
         .insert(request)
 }

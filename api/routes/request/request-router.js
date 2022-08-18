@@ -10,64 +10,9 @@ server.get('/', (req,res) => {
     request.getRequests(req.query.id)
         .then( async requests => {
             for(const request of requests){
-                if(request.set){
-                    await setDB.getSet(request.setClass).then(set=>{
-                        request.setItems ={
-
-                            wpnID: '318'+set.wpnID,
-                            wpnName: set.wpnName,
-                            wpnIcon: 'https://xivapi.com'+set.wpnIcon,
-
-                            headID: '318'+set.headID,
-                            headName: set.headName,
-                            headIcon: 'https://xivapi.com'+set.headIcon,
-
-                            chestID: '318'+set.chestID,
-                            chestName: set.chestName,
-                            chestIcon: 'https://xivapi.com'+set.chestIcon,
-
-                            handsID: '318'+set.handsID,
-                            handsName: set.handsName,
-                            handsIcon: 'https://xivapi.com'+set.handsIcon,
-
-                            legsID: '318'+set.legsID,
-                            legsName: set.legsName,
-                            legsIcon: 'https://xivapi.com'+set.legsIcon,
-
-                            feetID: '318'+set.feetID,
-                            feetName: set.feetName,
-                            feetIcon: 'https://xivapi.com'+set.feetIcon,
-
-                            beltID: '318'+set.beltID,
-                            beltName: set.beltName,
-                            beltIcon: 'https://xivapi.com'+set.beltIcon,
-
-                            earID: '318'+set.earID,
-                            earName: set.earName,
-                            earIcon: 'https://xivapi.com'+set.earIcon,
-
-                            neckID: '318'+set.neckID,
-                            neckName: set.neckName,
-                            neckIcon: 'https://xivapi.com'+set.neckIcon,
-
-                            wristID: '318'+set.wristID,
-                            wristName: set.wristName,
-                            wristIcon: 'https://xivapi.com'+set.wristIcon,
-
-                            ringID: '318'+set.ringID,
-                            ringName: set.ringName,
-                            ringIcon: 'https://xivapi.com'+set.ringIcon
-
-                        }
-                        if(set.Class === 'pld'){
-                            request.setItems.shdID = set.shdID 
-                            request.setItems.shdName = set.shdName
-                            request.setItems.shdIcon = 'https://xivapi.com'+set.shdIcon
-                        } 
-                    })
-                }
+              
+              console.log()
             }
-    
             res.status(200).json({ "Requests": requests})
         })
         .catch(err => {
@@ -79,17 +24,19 @@ server.get('/', (req,res) => {
 
 server.post('/submit', (req,res) => {
     const newUser = {
-        uuid: req.body.user.id,
+        uuid: req.body.user.uuid,
         username: req.body.user.username,
         avatar: req.body.user.avatar,
         discriminator: req.body.user.discriminator,
       }
+    //   console.log(newUser)
     userDB.getUser(newUser.uuid)
         .then(user => {
+            // console.log(user)
             if(!user){
                 userDB.addUser(newUser)
                 .then( uuid => {
-                    request.submitRequest(req.body.post)
+                    request.submitRequest(req.body.request)
                         .then( requests => {
                             res.status(200).json('success')
                         })
@@ -97,9 +44,10 @@ server.post('/submit', (req,res) => {
                 }) 
                 .catch( err => console.log(err))   
                } else {
+                console.log('else')
                 userDB.updateUser(newUser)
                 .then( uuid => {
-                    request.submitRequest(req.body.post)
+                    request.submitRequest(req.body.request)
                     .then( requests => {
                         res.status(200).json('success')
                     })
