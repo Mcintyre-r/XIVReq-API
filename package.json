@@ -11,7 +11,7 @@
   "author": "Ronald McIntyre",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bcryptjs": "^2.4.3",
     "btoa": "^1.2.1",
     "cors": "^2.8.5",
