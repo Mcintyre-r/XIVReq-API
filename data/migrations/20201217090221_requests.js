@@ -44,7 +44,7 @@ exports.up = function(knex) {
             .notNullable()
         tbl.string('requesterId')
             .notNullable()
-        tbl.string('requesterDescriminator')
+        tbl.string('requesterDiscriminator')
             .notNullable()
         tbl.string('requesterPicture')
             .notNullable()
