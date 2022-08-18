@@ -62,12 +62,14 @@ server.put('/claim', (req,res)=>{
         workerPicture: user.avatar,
         claimed: true
     }
+    let requester;
+    request.getSpecificRequests(requestId)
+        .then( requested => console.log(requested))
+    const msg = new webhook.MessageBuilder()
+                .setName('Req-Notify')
+                .setText(`<@${requester}> an order you submitted has been claimed by <@${user.uuid}>. Please connect with them to deliver any required materials.`)
     request.updateRequest(update, requestId)
         .then( update => {
-            console.log(update)
-            const msg = new webhook.MessageBuilder()
-                .setName('Req-Notify')
-                .setText(`<@${update.requesterId}> an order you submitted has been claimed by <@${user.uuid}>. Please connect with them to deliver any required materials.`)
             Hook.send(msg)
                 .catch(err => console.log(err))
             res.status(200).json('success')})

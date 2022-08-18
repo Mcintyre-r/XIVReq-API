@@ -4,7 +4,8 @@ module.exports = {
     getRequests,
     submitRequest,
     deleteRequest,
-    updateRequest
+    updateRequest,
+    getSpecificRequests
 }
 
 function getRequests(query){
@@ -12,6 +13,14 @@ function getRequests(query){
         .modify(function (qb) {
         if (query) {
           qb.where('requesterId', query);
+        }})
+}
+
+function getSpecificRequests(query){
+    return db('requests')
+        .modify(function (qb) {
+        if (query) {
+          qb.where('id', query);
         }})
 }
 
