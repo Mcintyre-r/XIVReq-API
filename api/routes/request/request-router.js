@@ -64,7 +64,7 @@ server.put('/claim', (req,res)=>{
     }
     let requester;
     request.getSpecificRequests(requestId)
-        .then( requested => console.log(requested))
+        .then( requested => requester = requested[0].requesterId)
     const msg = new webhook.MessageBuilder()
                 .setName('Req-Notify')
                 .setText(`<@${requester}> an order you submitted has been claimed by <@${user.uuid}>. Please connect with them to deliver any required materials.`)
