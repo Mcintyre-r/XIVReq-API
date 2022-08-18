@@ -70,7 +70,7 @@ server.put('/claim', (req,res)=>{
 server.put('/complete', (req,res)=>{
     const msg = new webhook.MessageBuilder()
         .setName('Req-Notify')
-        .setText(`<@${req.body.request.requesterId}> your order of ${req.body.request.quantity} ${req.body.request.item} is now ready!`)
+        .setText(`<@${req.body.request.requesterId}> an order you submitted is now ready! Visit the site for more details.`)
     request.updateRequest({completed: true}, req.body.request.id)
     .then( update => {
         Hook.send(msg)
