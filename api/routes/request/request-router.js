@@ -9,10 +9,6 @@ const Hook = new webhook.Webhook(process.env.WEBHOOK);
 server.get('/', (req,res) => {
     request.getRequests(req.query.id)
         .then( async requests => {
-            for(const request of requests){
-              
-              console.log()
-            }
             res.status(200).json({ "Requests": requests})
         })
         .catch(err => {
@@ -29,10 +25,8 @@ server.post('/submit', (req,res) => {
         avatar: req.body.user.avatar,
         discriminator: req.body.user.discriminator,
       }
-    //   console.log(newUser)
     userDB.getUser(newUser.uuid)
         .then(user => {
-            // console.log(user)
             if(!user){
                 userDB.addUser(newUser)
                 .then( uuid => {
@@ -44,7 +38,6 @@ server.post('/submit', (req,res) => {
                 }) 
                 .catch( err => console.log(err))   
                } else {
-                console.log('else')
                 userDB.updateUser(newUser)
                 .then( uuid => {
                     request.submitRequest(req.body.request)
@@ -75,7 +68,6 @@ server.put('/claim', (req,res)=>{
 })
 
 server.put('/complete', (req,res)=>{
-    console.log(req.body.request)
     const msg = new webhook.MessageBuilder()
         .setName('Req-Notify')
         .setText(`<@${req.body.request.requesterId}> your order of ${req.body.request.quantity} ${req.body.request.item} is now ready!`)
