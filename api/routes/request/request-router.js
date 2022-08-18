@@ -64,17 +64,21 @@ server.put('/claim', (req,res)=>{
     }
     let requester;
     request.getSpecificRequests(requestId)
-        .then( requested => requester = requested[0].requesterId)
-        .catch(err => console.log(err))
-    const msg = new webhook.MessageBuilder()
+        .then( requested => {
+            requester = requested[0].requesterId
+            const msg = new webhook.MessageBuilder()
                 .setName('Req-Notify')
                 .setText(`<@${requester}> an order you submitted has been claimed by <@${user.uuid}>. Please connect with them to deliver any required materials.`)
-    request.updateRequest(update, requestId)
-        .then( update => {
-            Hook.send(msg)
-                .catch(err => console.log(err))
-            res.status(200).json('success')})
-        .catch( err => console.log(err))
+            request.updateRequest(update, requestId)
+                .then( update => {
+                    Hook.send(msg)
+                        .catch(err => console.log(err))
+                    res.status(200).json('success')})
+                .catch( err => console.log(err))
+            }
+        )
+        .catch(err => console.log(err))
+    
 })
 
 server.put('/complete', (req,res)=>{
