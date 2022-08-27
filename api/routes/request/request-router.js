@@ -121,7 +121,7 @@ server.put('/claim', (req,res)=>{
 server.put('/complete', (req,res)=>{
     const msg = new webhook.MessageBuilder()
         .setName('Req-Notify')
-        .setText(`<@${req.body.request.requesterId}> an order you submitted is now ready! Visit the site for more details.`)
+        .setText(`<@${req.body.request.requesterId}> an order you submitted is now ready! Your crafter will connect with you to sort out delivery if not already discussed.`)
         if(req.body.request.quantity){
             potDB.updateRequest({completed: true}, req.body.request.id)
             .then( update => {
