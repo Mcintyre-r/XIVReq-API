@@ -5,6 +5,7 @@ const requestRouter = require('./routes/request/request-router.js')
 const userRouter = require('./routes/user/user-router.js')
 const authRouter = require('./routes/auth/auth-router.js')
 const setRouter = require('./routes/set/set-router.js')
+const resetRouter = require('./routes/reset/reset-router')
 const server = express();
 
 
@@ -31,5 +32,6 @@ server.get('/', (req,res) => {
 server.use('/api/auth', authRouter);
 server.use('/api/requests', requestRouter);
 server.use('/api/user', userRouter)
+server.use('/api/reset', resetRouter)
 
 module.exports = server;
