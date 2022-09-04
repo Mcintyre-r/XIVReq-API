@@ -1,7 +1,7 @@
 const server = require('express').Router();
-const request = require('./request-model.js');
+const request = require('../request-model.js');
 const userDB = require('../user/user-model');
-const resetDB = require('../reset/reset-model')
+const resetDB = require('./reset/reset-model')
 const webhook = require('webhook-discord');
 const potDB = require('../pots/pot-model.js');
 const Hook = new webhook.Webhook(process.env.WEBHOOK);
