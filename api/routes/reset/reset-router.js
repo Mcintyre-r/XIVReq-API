@@ -20,6 +20,7 @@ server.get('/', (req,res) => {
 
 
 server.post('/add', (req,res) => {
+    console.log(req)
     resetDB.submitReset(req.body.uuid)
     .then( reset => {
         res.status(200).json('success')
