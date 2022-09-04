@@ -8,7 +8,7 @@ const Hook = new webhook.Webhook(process.env.WEBHOOK);
 
 
 server.get('/', (req,res) => {
-    resetDB.getReset()
+    resetDB.getResets()
         .then( async resets => {
             res.status(200).json(resets)
         })
