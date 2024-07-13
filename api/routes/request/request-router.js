@@ -75,7 +75,7 @@ server.put('/claim', (req,res)=>{
     const user = req.body.user
     const update = {
         workerID: user.uuid,
-        worker: `${user.username}#${user.discriminator}`,
+        worker: user.username,
         workerPicture: user.avatar,
         claimed: true
     }
